@@ -1,0 +1,725 @@
+{
+  "season": {
+    "id": "S-2627",
+    "name": "虚构赛季 26/27",
+    "ruleVersionId": "RV-HANDBOOK-1",
+    "sections": [
+      {
+        "id": "A",
+        "label": "鲸湾分区"
+      },
+      {
+        "id": "B",
+        "label": "雾岭分区"
+      }
+    ],
+    "qualificationSpotsPerSection": 2,
+    "wildcardSlots": 1,
+    "notes": "所有队名、条款、判罚均为虚构示例，不映射任何真实赛事。礁脉回声为季中增补队伍，仅编排了与盐沼行者的资格附加赛（加赛）。"
+  },
+  "rulesets": [
+    {
+      "id": "RV-HANDBOOK-1",
+      "label": "复核赛程手册 v1（虚构）",
+      "validFrom": "2026-08-01",
+      "notes": "首版：先对赛积分，再对赛净胜球，再总净胜球、总进球，最后抽签（固定种子）。加赛只计入总成绩，不计入对赛子集。不设跨组比较。",
+      "definition": {
+        "points": {
+          "win": 3,
+          "draw": 1,
+          "loss": 0,
+          "forfeitWin": 3,
+          "forfeitLoss": 0
+        },
+        "penalties": {
+          "yellow": 0,
+          "secondYellow": 0,
+          "red": 0,
+          "forfeitPointDeduction": 1
+        },
+        "tiebreakerPlan": {
+          "steps": [
+            {
+              "id": "h2h-points",
+              "scope": "head_to_head",
+              "metric": "points",
+              "subset": {
+                "stages": [
+                  "group"
+                ]
+              },
+              "label": "并列队伍之间分组赛积分"
+            },
+            {
+              "id": "h2h-gd",
+              "scope": "head_to_head",
+              "metric": "goal_diff",
+              "subset": {
+                "stages": [
+                  "group"
+                ]
+              },
+              "label": "并列队伍之间分组赛净胜球"
+            },
+            {
+              "id": "overall-gd",
+              "scope": "all",
+              "metric": "goal_diff",
+              "label": "全部比赛净胜球"
+            },
+            {
+              "id": "overall-gf",
+              "scope": "all",
+              "metric": "goals_for",
+              "label": "全部比赛进球数"
+            },
+            {
+              "id": "lots",
+              "scope": "all",
+              "metric": "draw_lots",
+              "label": "抽签（固定种子）"
+            }
+          ]
+        },
+        "crossGroup": {
+          "enabled": false,
+          "label": "v1 不设跨组比较；跨组名额保持待定"
+        },
+        "playin": {
+          "points": {
+            "win": 3,
+            "draw": 1,
+            "loss": 0
+          },
+          "countsFor": [
+            "overall"
+          ]
+        }
+      }
+    },
+    {
+      "id": "RV-HANDBOOK-2",
+      "label": "复核赛程手册 v2（虚构）",
+      "validFrom": "2027-01-15",
+      "notes": "改版：对赛子集限定为分组赛+加赛；增加纪律分步骤；引入跨组比较（外卡）。",
+      "definition": {
+        "points": {
+          "win": 3,
+          "draw": 1,
+          "loss": 0,
+          "forfeitWin": 3,
+          "forfeitLoss": 0
+        },
+        "penalties": {
+          "yellow": 1,
+          "secondYellow": 2,
+          "red": 3,
+          "forfeitPointDeduction": 1
+        },
+        "tiebreakerPlan": {
+          "steps": [
+            {
+              "id": "h2h-points",
+              "scope": "head_to_head",
+              "metric": "points",
+              "subset": {
+                "stages": [
+                  "group",
+                  "playin"
+                ]
+              },
+              "label": "并列队伍之间分组赛与加赛积分"
+            },
+            {
+              "id": "h2h-gd",
+              "scope": "head_to_head",
+              "metric": "goal_diff",
+              "subset": {
+                "stages": [
+                  "group",
+                  "playin"
+                ]
+              },
+              "label": "并列队伍之间分组赛与加赛净胜球"
+            },
+            {
+              "id": "overall-gd",
+              "scope": "all",
+              "metric": "goal_diff",
+              "label": "全部比赛净胜球"
+            },
+            {
+              "id": "discipline",
+              "scope": "all",
+              "metric": "disciplinary",
+              "direction": "asc",
+              "label": "纪律分（越低越好）"
+            },
+            {
+              "id": "lots",
+              "scope": "all",
+              "metric": "draw_lots",
+              "label": "抽签（固定种子）"
+            }
+          ]
+        },
+        "crossGroup": {
+          "enabled": true,
+          "label": "外卡名额可跨组比较",
+          "steps": [
+            {
+              "id": "xg-points",
+              "scope": "cross_group",
+              "metric": "points",
+              "label": "各分区外卡候选积分"
+            },
+            {
+              "id": "xg-gd",
+              "scope": "cross_group",
+              "metric": "goal_diff",
+              "label": "各分区外卡候选净胜球"
+            },
+            {
+              "id": "xg-discipline",
+              "scope": "cross_group",
+              "metric": "disciplinary",
+              "direction": "asc",
+              "label": "各分区外卡候选纪律分"
+            }
+          ]
+        },
+        "playin": {
+          "points": {
+            "win": 3,
+            "draw": 1,
+            "loss": 0
+          },
+          "countsFor": [
+            "overall",
+            "head_to_head"
+          ]
+        }
+      }
+    }
+  ],
+  "teams": [
+    {
+      "id": "T-KLP",
+      "name": "北岸汽笛",
+      "section": "A",
+      "seedLots": 3
+    },
+    {
+      "id": "T-FEN",
+      "name": "雾岭灯塔",
+      "section": "A",
+      "seedLots": 7
+    },
+    {
+      "id": "T-PAP",
+      "name": "纸鸢联",
+      "section": "A",
+      "seedLots": 1
+    },
+    {
+      "id": "T-DUN",
+      "name": "沙丘驿",
+      "section": "A",
+      "seedLots": 5
+    },
+    {
+      "id": "T-SLT",
+      "name": "盐沼行者",
+      "section": "A",
+      "seedLots": 9
+    },
+    {
+      "id": "T-GLS",
+      "name": "玻璃港巡游",
+      "section": "B",
+      "seedLots": 4
+    },
+    {
+      "id": "T-ASH",
+      "name": "灰烬竞技",
+      "section": "B",
+      "seedLots": 2
+    },
+    {
+      "id": "T-QRT",
+      "name": "石英城",
+      "section": "B",
+      "seedLots": 8
+    },
+    {
+      "id": "T-MOS",
+      "name": "苔原信使",
+      "section": "B",
+      "seedLots": 6
+    },
+    {
+      "id": "T-REF",
+      "name": "礁脉回声",
+      "section": "B",
+      "seedLots": 10
+    }
+  ],
+  "matches": [
+    {
+      "id": "M-A-01",
+      "stage": "group",
+      "section": "A",
+      "home": "T-KLP",
+      "away": "T-FEN",
+      "homeGoals": 1,
+      "awayGoals": 0,
+      "playedAt": "2026-09-05",
+      "status": "final",
+      "cards": {
+        "home": {
+          "yellow": 1,
+          "red": 0
+        },
+        "away": {
+          "yellow": 2,
+          "red": 0
+        }
+      }
+    },
+    {
+      "id": "M-A-02",
+      "stage": "group",
+      "section": "A",
+      "home": "T-FEN",
+      "away": "T-PAP",
+      "homeGoals": 2,
+      "awayGoals": 0,
+      "playedAt": "2026-09-06",
+      "status": "final",
+      "cards": {
+        "home": {
+          "yellow": 3,
+          "red": 0
+        },
+        "away": {
+          "yellow": 0,
+          "red": 1
+        }
+      }
+    },
+    {
+      "id": "M-A-03",
+      "stage": "group",
+      "section": "A",
+      "home": "T-PAP",
+      "away": "T-KLP",
+      "homeGoals": 3,
+      "awayGoals": 1,
+      "playedAt": "2026-09-12",
+      "status": "final",
+      "cards": {
+        "home": {
+          "yellow": 2,
+          "red": 0
+        },
+        "away": {
+          "yellow": 1,
+          "red": 0
+        }
+      }
+    },
+    {
+      "id": "M-A-04",
+      "stage": "group",
+      "section": "A",
+      "home": "T-KLP",
+      "away": "T-SLT",
+      "homeGoals": 6,
+      "awayGoals": 0,
+      "playedAt": "2026-09-13",
+      "status": "final",
+      "cards": {
+        "home": {
+          "yellow": 1,
+          "red": 0
+        },
+        "away": {
+          "yellow": 1,
+          "red": 0
+        }
+      }
+    },
+    {
+      "id": "M-A-05",
+      "stage": "group",
+      "section": "A",
+      "home": "T-FEN",
+      "away": "T-SLT",
+      "homeGoals": 3,
+      "awayGoals": 0,
+      "playedAt": "2026-09-19",
+      "status": "final",
+      "cards": {
+        "home": {
+          "yellow": 0,
+          "red": 0
+        },
+        "away": {
+          "yellow": 2,
+          "red": 0
+        }
+      }
+    },
+    {
+      "id": "M-A-06",
+      "stage": "group",
+      "section": "A",
+      "home": "T-PAP",
+      "away": "T-SLT",
+      "homeGoals": 2,
+      "awayGoals": 0,
+      "playedAt": "2026-09-20",
+      "status": "final",
+      "cards": {
+        "home": {
+          "yellow": 2,
+          "red": 0
+        },
+        "away": {
+          "yellow": 3,
+          "red": 0
+        }
+      }
+    },
+    {
+      "id": "M-A-07",
+      "stage": "group",
+      "section": "A",
+      "home": "T-SLT",
+      "away": "T-DUN",
+      "homeGoals": 0,
+      "awayGoals": 1,
+      "playedAt": "2026-09-26",
+      "status": "final",
+      "cards": {
+        "home": {
+          "yellow": 1,
+          "red": 0
+        },
+        "away": {
+          "yellow": 1,
+          "red": 0
+        }
+      }
+    },
+    {
+      "id": "M-A-08",
+      "stage": "playin",
+      "section": "A",
+      "home": "T-SLT",
+      "away": "T-DUN",
+      "homeGoals": 1,
+      "awayGoals": 0,
+      "playedAt": "2026-10-03",
+      "status": "final",
+      "cards": {
+        "home": {
+          "yellow": 2,
+          "red": 0
+        },
+        "away": {
+          "yellow": 2,
+          "red": 0
+        }
+      },
+      "note": "加赛：只计入总成绩，不计入对赛子集（v1）"
+    },
+    {
+      "id": "M-B-01",
+      "stage": "group",
+      "section": "B",
+      "home": "T-GLS",
+      "away": "T-QRT",
+      "homeGoals": 1,
+      "awayGoals": 0,
+      "playedAt": "2026-09-05",
+      "status": "final",
+      "cards": {
+        "home": {
+          "yellow": 0,
+          "red": 0
+        },
+        "away": {
+          "yellow": 4,
+          "red": 1
+        }
+      }
+    },
+    {
+      "id": "M-B-02",
+      "stage": "group",
+      "section": "B",
+      "home": "T-ASH",
+      "away": "T-GLS",
+      "homeGoals": 1,
+      "awayGoals": 0,
+      "playedAt": "2026-09-06",
+      "status": "final",
+      "cards": {
+        "home": {
+          "yellow": 3,
+          "red": 0
+        },
+        "away": {
+          "yellow": 1,
+          "red": 0
+        }
+      }
+    },
+    {
+      "id": "M-B-03",
+      "stage": "group",
+      "section": "B",
+      "home": "T-QRT",
+      "away": "T-ASH",
+      "homeGoals": 1,
+      "awayGoals": 0,
+      "playedAt": "2026-09-12",
+      "status": "final",
+      "cards": {
+        "home": {
+          "yellow": 1,
+          "red": 0
+        },
+        "away": {
+          "yellow": 2,
+          "red": 0
+        }
+      }
+    },
+    {
+      "id": "M-B-04",
+      "stage": "group",
+      "section": "B",
+      "home": "T-GLS",
+      "away": "T-MOS",
+      "homeGoals": 8,
+      "awayGoals": 0,
+      "playedAt": "2026-09-13",
+      "status": "final",
+      "cards": {
+        "home": {
+          "yellow": 2,
+          "red": 0
+        },
+        "away": {
+          "yellow": 2,
+          "red": 0
+        }
+      }
+    },
+    {
+      "id": "M-B-05",
+      "stage": "group",
+      "section": "B",
+      "home": "T-ASH",
+      "away": "T-MOS",
+      "homeGoals": 2,
+      "awayGoals": 0,
+      "playedAt": "2026-09-19",
+      "status": "final",
+      "cards": {
+        "home": {
+          "yellow": 1,
+          "red": 1
+        },
+        "away": {
+          "yellow": 3,
+          "red": 0
+        }
+      }
+    },
+    {
+      "id": "M-B-06",
+      "stage": "group",
+      "section": "B",
+      "home": "T-QRT",
+      "away": "T-MOS",
+      "homeGoals": 6,
+      "awayGoals": 0,
+      "playedAt": "2026-09-20",
+      "status": "final",
+      "cards": {
+        "home": {
+          "yellow": 2,
+          "red": 0
+        },
+        "away": {
+          "yellow": 0,
+          "red": 0
+        }
+      }
+    },
+    {
+      "id": "M-B-07",
+      "stage": "group",
+      "section": "B",
+      "home": "T-GLS",
+      "away": "T-REF",
+      "homeGoals": 0,
+      "awayGoals": 1,
+      "playedAt": "2026-09-26",
+      "status": "final",
+      "cards": {
+        "home": {
+          "yellow": 0,
+          "red": 0
+        },
+        "away": {
+          "yellow": 1,
+          "red": 0
+        }
+      }
+    },
+    {
+      "id": "M-B-08",
+      "stage": "group",
+      "section": "B",
+      "home": "T-ASH",
+      "away": "T-REF",
+      "homeGoals": 0,
+      "awayGoals": 1,
+      "playedAt": "2026-09-27",
+      "status": "final",
+      "cards": {
+        "home": {
+          "yellow": 2,
+          "red": 0
+        },
+        "away": {
+          "yellow": 0,
+          "red": 0
+        }
+      }
+    },
+    {
+      "id": "M-B-09",
+      "stage": "group",
+      "section": "B",
+      "home": "T-QRT",
+      "away": "T-REF",
+      "homeGoals": 0,
+      "awayGoals": 1,
+      "playedAt": "2026-09-28",
+      "status": "final",
+      "cards": {
+        "home": {
+          "yellow": 1,
+          "red": 0
+        },
+        "away": {
+          "yellow": 0,
+          "red": 0
+        }
+      }
+    },
+    {
+      "id": "M-B-10",
+      "stage": "group",
+      "section": "B",
+      "home": "T-MOS",
+      "away": "T-REF",
+      "homeGoals": 0,
+      "awayGoals": 4,
+      "playedAt": "2026-10-02",
+      "status": "final",
+      "cards": {
+        "home": {
+          "yellow": 0,
+          "red": 0
+        },
+        "away": {
+          "yellow": 1,
+          "red": 0
+        }
+      }
+    },
+    {
+      "id": "M-A-09",
+      "stage": "group",
+      "section": "A",
+      "home": "T-PAP",
+      "away": "T-DUN",
+      "homeGoals": 0,
+      "awayGoals": 0,
+      "playedAt": "2026-09-30",
+      "status": "final",
+      "cards": {
+        "home": {
+          "yellow": 1,
+          "red": 0
+        },
+        "away": {
+          "yellow": 2,
+          "red": 0
+        }
+      }
+    }
+  ],
+  "penalties": [
+    {
+      "id": "P-01",
+      "team": "T-PAP",
+      "section": "A",
+      "kind": "point_deduction",
+      "points": 1,
+      "reason": "虚构纪律复核：超编替补席",
+      "recordedAt": "2026-10-02T10:00:00Z",
+      "effectiveAt": "2026-09-13T00:00:00Z",
+      "status": "active"
+    }
+  ],
+  "appeals": [
+    {
+      "id": "AP-01",
+      "team": "T-PAP",
+      "penaltyId": "P-01",
+      "title": "对超编替补席扣分提出申诉（虚构）",
+      "filedAt": "2026-10-05T09:00:00Z",
+      "status": "open",
+      "requestedOutcome": "撤销扣分",
+      "hearingAt": "2026-10-12T09:00:00Z",
+      "note": "主张复核时替补席人数已获更正。未裁决前扣分保持生效。"
+    },
+    {
+      "id": "AP-02",
+      "team": "T-ASH",
+      "matchId": "M-B-03",
+      "title": "申请更正 M-B-03 比分（虚构）",
+      "filedAt": "2026-10-08T12:00:00Z",
+      "status": "hearing",
+      "requestedOutcome": "比分改为 1:2",
+      "note": "声称记录员把主客队进球记反；尚未裁决。"
+    },
+    {
+      "id": "AP-03",
+      "team": "T-QRT",
+      "matchId": "M-B-01",
+      "title": "申请更正 M-B-01 比分（虚构）",
+      "filedAt": "2026-10-10T08:00:00Z",
+      "status": "upheld",
+      "requestedOutcome": "比分改为 0:1（客队胜）",
+      "note": "复核录像后发现 GLS 的唯一进球在进攻前已越位。",
+      "hearingAt": "2026-10-18T09:00:00Z",
+      "decidedAt": "2026-10-20T10:00:00Z",
+      "decisionNote": "申诉成立，M-B-01 更正为 0:1，追溯至比赛日生效。",
+      "decision": {
+        "homeGoals": 0,
+        "awayGoals": 1,
+        "effectiveAt": "2026-09-05T00:00:00Z",
+        "recordedAt": "2026-10-20T10:00:00Z",
+        "reason": "申诉 AP-03 裁决：M-B-01 更正为 0:1（虚构）"
+      }
+    }
+  ]
+}

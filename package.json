@@ -1,0 +1,21 @@
+{
+  "name": "fictional-tournament-desk",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Fictional tournament standings workbench: rules versions, appeals with retroactive effect, layered head-to-head tiebreakers, scenarios.",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "seed": "node scripts/seed.js",
+    "test": "node --test --test-reporter=spec \"tests/*.test.js\"",
+    "test:ui": "node tests/ui.smoke.mjs",
+    "check": "node --check server/*.js"
+  },
+  "devDependencies": {
+    "jsdom": "^31.0.1"
+  }
+}

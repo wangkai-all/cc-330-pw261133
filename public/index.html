@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>赛果编排台 · 虚构赛事</title>
+  <meta name="description" content="虚构赛事排名工作台：规则版本、追溯申诉、分层对赛排序、情景试算。" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231b2a33'/%3E%3Cpath d='M8 10h16M8 16h10M8 22h13' stroke='%23e8b45a' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <div class="app">
+    <aside class="rail">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="26" height="26"><rect width="32" height="32" rx="7" fill="#1b2a33"/><path d="M8 10h16M8 16h10M8 22h13" stroke="#e8b45a" stroke-width="2.4" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="brand-name">赛果编排台</div>
+          <div class="brand-sub">虚构赛事 · 非真实规则</div>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="主导航">
+        <button class="nav-item is-active" data-view="standings"><span class="nav-ico">▤</span>积分与晋级</button>
+        <button class="nav-item" data-view="appeals"><span class="nav-ico">⚖</span>申诉与更正<span class="nav-count" id="nav-open-appeals"></span></button>
+        <button class="nav-item" data-view="scenarios"><span class="nav-ico">⧉</span>情景试算</button>
+        <button class="nav-item" data-view="report"><span class="nav-ico">≡</span>版本报告</button>
+        <button class="nav-item" data-view="data"><span class="nav-ico">⛁</span>数据与恢复</button>
+      </nav>
+
+      <div class="rail-foot">
+        <div class="rail-note">
+          <strong>演示声明</strong>
+          所有队名、规则条款、判罚与申诉均为虚构，不映射任何真实赛事。
+        </div>
+        <div class="revision-chip" title="正式数据修订号：任何正式写入都会递增">
+          <span class="dot"></span> revision <b id="revision-chip">–</b>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <div class="topbar-left">
+          <h1 id="view-title">积分与晋级</h1>
+          <p id="view-subtitle" class="subtitle">分组赛、加赛、处罚与申诉结果合并后的分层排序</p>
+        </div>
+        <div class="topbar-right">
+          <div class="segmented" role="group" aria-label="排名视图">
+            <button class="seg is-active" data-viewmode="final" title="包含所有已生效（含追溯）的裁决">最终更正</button>
+            <button class="seg" data-viewmode="known" title="仅包含裁决生效当时已知的结果，不含追溯更正">历史已知</button>
+          </div>
+          <label class="field compact">
+            <span>规则版本</span>
+            <select id="rule-select" aria-label="规则版本"></select>
+          </label>
+          <button class="btn ghost" id="btn-refresh" title="重新读取服务端数据">刷新</button>
+        </div>
+      </header>
+
+      <div id="banners" class="banners" aria-live="polite"></div>
+
+      <main id="app" class="content"><div class="loading">正在载入虚构赛季…</div></main>
+    </div>
+  </div>
+
+  <div id="drawer" class="drawer" hidden>
+    <div class="drawer-scrim" data-close-drawer></div>
+    <section class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+      <header class="drawer-head">
+        <div>
+          <h2 id="drawer-title">排序依据</h2>
+          <p id="drawer-sub" class="subtitle"></p>
+        </div>
+        <button class="icon-btn" data-close-drawer aria-label="关闭">✕</button>
+      </header>
+      <div id="drawer-body" class="drawer-body"></div>
+    </section>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>
